@@ -11,6 +11,7 @@ app.get('/vjudge?', (req, res) => {
          const browser = await puppeteer.launch();
          const page = await browser.newPage();
          await page.setDefaultTimeout(2000000);
+         await page.setDefaultNavigationTimeout(0);
          await page.goto(`${req.query.url}#rank`);
 
          const html = await page.$eval('#contest-rank-table', el => el.outerHTML);
