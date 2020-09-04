@@ -10,7 +10,7 @@ app.get('/vjudge?', (req, res) => {
    res.send('hi');
    try {
       (async () => {
-         const browser = await puppeteer.launch();
+         const browser = await puppeteer.launch({ args: puppeteer.defaultArgs(), executablePath: puppeteer.executablePath(), });
          const page = await browser.newPage();
          await page.setDefaultTimeout(2000000);
          await page.setDefaultNavigationTimeout(0);
