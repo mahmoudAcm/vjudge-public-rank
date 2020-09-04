@@ -38,13 +38,14 @@ app.get('/vjudge?', (req, res) => {
          });
 
          console.log(list);
+         res.send(list);
          await browser.close();
          console.log('done');
       })();
    } catch (e) {
-      console.log('err');
+      res.send('error');
    } finally {
-      res.send('hi');
+
    }
 });
 
