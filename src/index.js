@@ -6,6 +6,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 app.get('/vjudge?', (req, res) => {
+   res.send('hi');
    try {
       (async () => {
          const browser = await puppeteer.launch();
@@ -36,7 +37,7 @@ app.get('/vjudge?', (req, res) => {
             cur++;
          });
 
-         res.send(list);
+         console.log(list);
          await browser.close();
          console.log('done');
       })();
