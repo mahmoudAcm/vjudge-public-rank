@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 app.get('/vjudge?', (req, res) => {
-   console.log('here');
+   // console.log('here');
    try {
       (async () => {
          const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
@@ -15,29 +15,29 @@ app.get('/vjudge?', (req, res) => {
          await page.setDefaultNavigationTimeout(0);
          await page.goto(`${req.query.url}#rank`);
 
-         // const html = await page.$eval('#contest-rank-table', el => el.outerHTML);
-         //
-         // const $ = cheerio.load(html);
-         //
-         // let list = [];
-         //
-         // let cur = 0;
-         // $(".solved").each((index, el) => {
-         //    list.push({
-         //       count: $(el).text(),
-         //       handle: ''
-         //    });
-         // });
-         //
-         //
-         // $(".team a").each((index, el) => {
-         //    const string = $(el).attr('href');
-         //    let handle = string.split("/");
-         //    list[cur]["handle"] = handle[2];
-         //    cur++;
-         // });
-         //
-         // console.log(list);
+         const html = await page.$eval('#contest-rank-table', el => el.outerHTML);
+
+         const $ = cheerio.load(html);
+
+         let list = [];
+
+         let cur = 0;
+         $(".solved").each((index, el) => {
+            list.push({
+               count: $(el).text(),
+               handle: ''
+            });
+         });
+
+
+         $(".team a").each((index, el) => {
+            const string = $(el).attr('href');
+            let handle = string.split("/");
+            list[cur]["handle"] = handle[2];
+            cur++;
+         });
+
+         console.log(list);
          await browser.close();
          console.log('done');
       })();
