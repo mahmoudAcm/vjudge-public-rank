@@ -6,6 +6,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 app.get('/vjudge?', (req, res) => {
+   console.log('here');
    res.send('hi');
    try {
       (async () => {
