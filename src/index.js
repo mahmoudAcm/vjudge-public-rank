@@ -9,7 +9,7 @@ app.get('/vjudge?', (req, res) => {
    console.log('here');
    try {
       (async () => {
-         const browser = await puppeteer.launch({headless: false});
+         const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
          const page = await browser.newPage();
          await page.setDefaultTimeout(2000000);
          await page.setDefaultNavigationTimeout(0);
